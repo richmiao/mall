@@ -1,44 +1,64 @@
-version: '2'
+version: "2"
 services:
   mysql:
-    image: mysql:5.7
+    #image: mysql:5.7
+    image: mysql:latest
     ports:
       - 3306:3306
-    volumes:
-      - /mydata/mysql/data:/var/lib/mysql
-      - /mydata/mysql/conf:/etc/mysql
-      - /mydata/mysql/log:/var/log/mysql
+#    volumes:
+#      - /Users/rmiao002/mydata/mysql/data:/var/lib/mysql
+#      - /Users/rmiao002/mydata/mysql/conf:/etc/mysql
+#      - /Users/rmiao002/mydata/mysql/log:/var/log/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD:root
+      - MYSQL_ROOT_PASSWORD=root
+
   elasticsearch:
     image: elasticsearch:2.4
+    # image: elasticsearch:latest
     ports:
       - 9200:9200
       - 9300:9300
     volumes:
-      - /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins
-      - /mydata/elasticsearch/data:/usr/share/elasticsearch/data
+      - /Users/rmiao002/mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins
+      - /Users/rmiao002/mydata/elasticsearch/data:/usr/share/elasticsearch/data
   redis:
-    image: redis:3.2
+    # image: redis:3.2
+    image: redis:latest
     ports:
       - 6379:6379
     volumes:
-      - /mydata/redis/data:/data
+      - /Users/rmiao002/mydata/redis/data:/data
     command: redis-server --appendonly yes
   mongo:
-    image: mongo:3.2
+    # image: mongo:3.2
+    image: mongo:latest
     ports:
       - 27017:27017
     volumes:
-      - /mydata/mongo/db:/data/db
+      - /Users/rmiao002/mydata/mongo/db:/data/db
   nginx:
-    image: nginx:1.10
+    # image: nginx:1.10
+    image: nginx:latest
     ports:
       - 80:80
-    volumes:
-      - /mydata/nginx/html:/usr/share/nginx/html
-      - /mydata/nginx/logs:/var/log/nginx
-      - /mydata/nginx/conf:/etc/nginx
+#    volumes:
+#      - /Users/rmiao002/mydata/nginx/html:/usr/share/nginx/html
+#      - /Users/rmiao002/mydata/nginx/logs:/var/log/nginx
+#      - /Users/rmiao002/mydata/nginx/conf:/etc/nginx
+
+  rabbit:
+    image: "rabbitmq:3-management"
+    hostname: "localhost"
+    environment:
+      RABBITMQ_DEFAULT_USER: "mall"
+      RABBITMQ_DEFAULT_PASS: "mall"
+      RABBITMQ_DEFAULT_VHOST: "/mall"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq-localhost"
+
   mall-admin:
     image: mall/mall-admin:0.0.1-SNAPSHOT
     ports:
