@@ -59,24 +59,24 @@ services:
     labels:
       NAME: "rabbitmq-localhost"
 
-  mall-admin:
-    image: mall/mall-admin:0.0.1-SNAPSHOT
-    ports:
-      - 8080:8080
-    links:
-      - mysql:db
-  mall-search:
-    image: mall/mall-search:0.0.1-SNAPSHOT
-    ports:
-      - 8081:8081
-    links:
-      - elasticsearch:es
-      - mysql:db
-  mall-portal:
-    image: mall/mall-portal:0.0.1-SNAPSHOT
-    ports:
-      - 8085:8085
-    links:
-      - redis:redis
-      - mongo:mongo
-      - mysql:db
+#  mall-admin:
+#    image: mall/mall-admin:0.0.1-SNAPSHOT
+#    ports:
+#      - 8080:8080
+#    links:
+#      - mysql:db
+#  mall-search:
+#    image: mall/mall-search:0.0.1-SNAPSHOT
+#    ports:
+#      - 8081:8081
+#    links:
+#      - elasticsearch:es
+#      - mysql:db
+#  mall-portal:
+#    image: mall/mall-portal:0.0.1-SNAPSHOT
+#    ports:
+#      - 8085:8085
+#    links:
+#      - redis:redis
+#      - mongo:mongo
+#      - mysql:db
